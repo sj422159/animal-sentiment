@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dog Sentiment Detection</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    /* Reset and base */
+    body {
+      background: linear-gradient(to right bottom, #ffe0e0, #e0f7fa);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding-top: 120px;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 960px;
+    }
+
+    /* Title */
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 900;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+
+    p.lead {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 3rem;
+      user-select: none;
+    }
+
+    /* Cards Grid */
+    .row.g-4 {
+      gap: 2.5rem;
+    }
+
+    /* Card */
+    .card {
+      background: rgba(255 255 255 / 0.75);
+      backdrop-filter: saturate(180%) blur(15px);
+      border-radius: 1rem;
+      border: none;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      user-select: none;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    /* Icons */
+    .card-body i {
+      font-size: 5rem;
+      transition: color 0.3s ease;
+    }
+    .card:hover i {
+      color: #1e7e34; /* dark green for webcam card on hover */
+    }
+
+    .card:first-child:hover i {
+      color: #0d6efd; /* bootstrap primary blue for upload card */
+    }
+
+    /* Card Titles */
+    .card-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #222;
+      transition: color 0.3s ease;
+    }
+    .card:hover .card-title {
+      color: #0a58ca;
+    }
+
+    /* Card Text */
+    .card-text {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 2rem;
+      min-height: 65px; /* equal height for better alignment */
+    }
+
+    /* Buttons */
+    .btn-custom {
+      border-radius: 50px;
+      font-weight: 600;
+      padding: 0.65rem 2.5rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      user-select: none;
+      font-size: 1.1rem;
+    }
+
+    .btn-custom:hover,
+    .btn-custom:focus {
+      transform: scale(1.1);
+      box-shadow: 0 6px 18px rgb(0 0 0 / 0.15);
+      outline: none;
+    }
+
+    .btn-primary.btn-custom {
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+    }
+    .btn-primary.btn-custom:hover {
+      background-color: #0b5ed7;
+      border-color: #0b5ed7;
+    }
+
+    .btn-success.btn-custom {
+      background-color: #198754;
+      border-color: #198754;
+    }
+    .btn-success.btn-custom:hover {
+      background-color: #146c43;
+      border-color: #146c43;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #555;
+      user-select: none;
+      letter-spacing: 0.03em;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Responsive */
+    @media (max-width: 576px) {
+      body {
+        padding-top: 80px;
+      }
+      .hero-title {
+        font-size: 2.25rem;
+      }
+      .card-body i {
+        font-size: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container text-center" role="main" aria-label="Dog Sentiment Detection Main Content">
+  <!-- Title -->
+  <h1 class="hero-title mb-2">🐶 Dog Sentiment Detection</h1>
+  <p class="lead mb-5 text-muted">Choose how you'd like to detect your dog's mood:</p>
+
+  <!-- Cards Grid -->
+  <div class="row g-4 justify-content-center">
+    <!-- Upload Card -->
+    <div class="col-md-6 col-lg-5">
+      <div class="card">
+        <div class="card-body d-flex flex-column align-items-center">
+          <i class="bi bi-upload text-primary mb-3" aria-hidden="true"></i>
+          <h5 class="card-title fw-bold">Upload Photo or Video</h5>
+          <p class="card-text">Select a file from your device to analyze your dog’s emotions.</p>
+          <a href="/upload" class="btn btn-primary btn-custom px-4 py-2" role="button" aria-label="Go to Upload Page">Go to Upload</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Webcam Card -->
+    <div class="col-md-6 col-lg-5">
+      <div class="card">
+        <div class="card-body d-flex flex-column align-items-center">
+          <i class="bi bi-camera-video text-success mb-3" aria-hidden="true"></i>
+          <h5 class="card-title fw-bold">Use Live Webcam</h5>
+          <p class="card-text">Detect sentiment in real-time using your webcam feed.</p>
+          <a href="/webcam" class="btn btn-success btn-custom px-4 py-2" role="button" aria-label="Start Webcam">Start Webcam</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    Powered by AI &amp; lots of 🐶 love.
+  </footer>
+</div>
+
+</body>
+</html>
